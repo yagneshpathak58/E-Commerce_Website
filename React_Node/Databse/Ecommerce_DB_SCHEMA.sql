@@ -1,0 +1,118 @@
+CREATE DATABASE ecommerce_db;
+
+USE ecommerce_db;
+
+CREATE TABLE admin_master(
+    A_Id  INT(11) NOT NULL AUTO_INCREMENT,
+    A_Name VARCHAR(255) NOT NULL,
+    A_EMAIL VARCHAR(255) NOT NULL,
+    A_PHONE VARCHAR(255) NOT NULL,
+    A_Role VARCHAR(255) NOT NULL,
+    A_Username VARCHAR(255) NOT NULL,
+    A_PWD VARCHAR(255) NOT NULL,
+    A_Status VARCHAR(255) NOT NULL,
+    A_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(A_ID)
+);
+
+CREATE TABLE user_master(
+    U_Id INT(11) NOT NULL AUTO_INCREMENT,
+    U_Name VARCHAR(255) NOT NULL,
+    U_EMAIL VARCHAR(255) NOT NULL,
+    U_PHONE VARCHAR(255) NOT NULL,
+    U_Address VARCHAR(255) NOT NULL,
+    U_Username VARCHAR(255) NOT NULL,
+    U_PWD VARCHAR(255) NOT NULL,
+    U_Status VARCHAR(255) NOT NULL,
+    U_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(U_ID)
+)
+
+CREATE TABLE category_master(
+    Category_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Category_Name VARCHAR(255) NOT NULL,
+    Category_Status VARCHAR(255) NOT NULL,
+    Category_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Category_Id)
+);
+
+CREATE TABLE product_master(
+    P_Id INT(11) NOT NULL AUTO_INCREMENT,
+    P_C_Id INT(11) NOT NULL,
+    P_Name VARCHAR(255) NOT NULL,
+    P_Desc TEXT NOT NULL,
+    P_Price VARCHAR(255) NOT NULL,
+    P_Image VARCHAR(255) NOT NULL,
+    P_Status VARCHAR(255) NOT NULL,
+    P_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(P_Id)
+);
+
+CREATE TABLE cart_master(
+    Cart_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Cart_U_Id INT(11) NOT NULL,
+    Cart_P_Id INT(11) NOT NULL,
+    Cart_Qty INT(11) NOT NULL,
+    Cart_Status VARCHAR(255) NOT NULL,
+    Cart_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Cart_Id)
+);
+
+CREATE TABLE order_master(
+    Order_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Order_U_Id INT(11) NOT NULL,
+    Order_P_Id INT(11) NOT NULL,
+    Order_Qty INT(11) NOT NULL,
+    Order_Status VARCHAR(255) NOT NULL,
+    Order_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Order_Id)
+);
+
+CREATE TABLE payment_master(
+    Payment_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Payment_U_Id INT(11) NOT NULL,
+    Payment_P_Id INT(11) NOT NULL,
+    Payment_Qty INT(11) NOT NULL,
+    Payment_Status VARCHAR(255) NOT NULL,
+    Payment_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Payment_Id)
+);
+
+CREATE TABLE dilivery_master(
+    Dilivery_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Dilivery_U_Id INT(11) NOT NULL,
+    Dilivery_P_Id INT(11) NOT NULL,
+    Dilivery_Qty INT(11) NOT NULL,
+    Dilivery_Status VARCHAR(255) NOT NULL,
+    Dilivery_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Dilivery_Id)
+);
+
+CREATE TABLE return_master(
+    Return_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Return_U_Id INT(11) NOT NULL,
+    Return_P_Id INT(11) NOT NULL,
+    Return_Qty INT(11) NOT NULL,
+    Return_Status VARCHAR(255) NOT NULL,
+    Return_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Return_Id)
+);
+
+
+CREATE TABLE feedback_master(
+    Feedback_Id INT(11) NOT NULL AUTO_INCREMENT,
+    Feedback_U_Id INT(11) NOT NULL,
+    Feedback_Subject VARCHAR(255) NOT NULL,
+    Feedback_Message VARCHAR(255) NOT NULL,
+    Feedback_Status VARCHAR(255) NOT NULL,
+    Feedback_Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(Feedback_Id)
+);
+
+ALTER TABLE `product_master` ADD CONSTRAINT `product_category_key` FOREIGN KEY (`P_C_Id`) REFERENCES `category_master`(`Category_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `cart_master` ADD CONSTRAINT `cart_user_key` FOREIGN KEY (`Cart_U_Id`) REFERENCES `user_master`(`U_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `cart_master` ADD CONSTRAINT `cart_product_key` FOREIGN KEY (`Cart_P_Id`) REFERENCES `product_master`(`P_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `order_master` ADD CONSTRAINT `order_user_key` FOREIGN KEY (`Order_U_Id`) REFERENCES `user_master`(`U_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `order_master` ADD CONSTRAINT `order_product_key` FOREIGN KEY (`Order_P_Id`) REFERENCES `product_master`(`P_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `payment_master` ADD CONSTRAINT `payment_user_key` FOREIGN KEY (`Payment_U_Id`) REFERENCES `user_master`(`U_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT; ALTER TABLE `payment_master` ADD CONSTRAINT `payment_product_key` FOREIGN KEY (`Payment_P_Id`) REFERENCES `product_master`(`P_Id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
