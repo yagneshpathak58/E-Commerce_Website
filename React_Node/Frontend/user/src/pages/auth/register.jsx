@@ -23,26 +23,24 @@ function AuthRegister() {
 
   return (
     <MainLayout>
-      <div className="flex items-center justify-center min-h-[80vh] bg-gray-100 p-6">
-        <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-          <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
-            Create Your Account
-          </h1>
-          <p className="text-center text-gray-500">
-            Already have an account?{" "}
-            <Link to="/auth/login" className="text-blue-600 hover:underline">
-              Sign In
-            </Link>
-          </p>
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
+          Create Your Account
+        </h1>
+        <p className="text-center text-gray-500">
+          Already have an account?{" "}
+          <Link to="/auth/login" className="text-blue-600 hover:underline">
+            Sign In
+          </Link>
+        </p>
 
-          <CommonForm
-            fromControls={registerFromControls}
-            buttonText={"Sign Up"}
-            formData={formData}
-            setformData={setformData}
-            onSubmit={onSubmit}
-          />
-        </div>
+        <CommonForm
+          fromControls={registerFromControls}
+          buttonText={"Sign Up"}
+          formData={formData}
+          setformData={setformData}
+          onSubmit={onSubmit}
+        />
       </div>
     </MainLayout>
   );

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 // import Header from "../common/Header.jsx";
 // import Footer from "../common/Footer.jsx";
-import Header from "../common/Hearder";
+import Header from "../common/Header";
 import Footer from "../common/Footer";
 
 function ShoppingLayout() {

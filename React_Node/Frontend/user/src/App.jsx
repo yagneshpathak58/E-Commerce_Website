@@ -1,16 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import AuthLayout from "./components/auth/layout";
 import AuthLogin from "./pages/auth/login";
 import AuthRegister from "./pages/auth/register";
-import ShoppingLayout from "./components/shopping-view/layout";
-import NotFound from "./pages/not-found/index";
 import ShoppingHome from "./pages/shop/home";
 import ShoppingCheckout from "./pages/shop/checkout";
 import ShoppingListing from "./pages/shop/listing";
 import ShoppingAccount from "./pages/shop/account";
+import NotFound from "./pages/not-found/index";
 import CheckAuth from "./components/common/checkauth";
 import { useEffect } from "react";
 import { startTokenRefresh } from "./utils/TokenManager";
+import MainLayout from "./layout/MainLayout";
 
 function App() {
   useEffect(() => {
@@ -18,19 +17,19 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col overflow-hidden bg-white">
+    <div className="flex flex-col min-h-screen w-full bg-white">
       <Routes>
-        <Route path="/auth" element={<CheckAuth><AuthLayout /></CheckAuth>}>
-          <Route path="login" element={<AuthLogin />} />
-          <Route path="register" element={<AuthRegister />} />
-        </Route>
+        {/* Protected Auth Pages (Only for Guests) */}
+        <Route path="/auth/login" element={<CheckAuth><AuthLogin /></CheckAuth>} />
+        <Route path="/auth/register" element={<CheckAuth><AuthRegister /></CheckAuth>} />
 
-        <Route path="/shop" element={<CheckAuth><ShoppingLayout /></CheckAuth>} >
-          <Route path="home" element={<ShoppingHome />} />
-          <Route path="checkout" element={<ShoppingCheckout />} />
-          <Route path="listing" element={<ShoppingListing />} />
-          <Route path="account" element={<ShoppingAccount />} />
-        </Route>
+        {/* Protected Shopping Pages (Only for Authenticated Users) */}
+        <Route path="/shop/home" element={<CheckAuth><ShoppingHome /></CheckAuth>} />
+        <Route path="/shop/checkout" element={<CheckAuth><ShoppingCheckout /></CheckAuth>} />
+        <Route path="/shop/listing" element={<CheckAuth><ShoppingListing /></CheckAuth>} />
+        <Route path="/shop/account" element={<CheckAuth><ShoppingAccount /></CheckAuth>} />
+
+        {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
@@ -40,35 +39,29 @@ function App() {
 export default App;
 
 
-// import { Routes, Route } from "react-router-dom";  // ✅ Import Routes
-// import AuthLayout from "./components/auth/layout.jsx";  // ✅ Import layout
-// import AuthLogin from "./pages/auth/login.jsx";         // ✅ Import Login Page
-// import AuthRegister from "./pages/auth/register.jsx";   // ✅ Import Register Page
-// import ShoppingLayout from "./components/shopping-view/layout.jsx";
-// import NotFound from "./pages/not-found/index.jsx";
-// import ShoppingHome from "./pages/shop/home.jsx";
-// import ShoppingCheckout from "./pages/shop/checkout.jsx";
-// import ShoppingListing from "./pages/shop/listing.jsx";
-// import ShoppingAccount from "./pages/shop/account.jsx";
-// import CheckAuth from "./components/common/checkauth.jsx";
+
+// import { Routes, Route } from "react-router-dom";
+// import AuthLayout from "./components/auth/layout";
+// import AuthLogin from "./pages/auth/login";
+// import AuthRegister from "./pages/auth/register";
+// import ShoppingLayout from "./components/shopping-view/layout";
+// import NotFound from "./pages/not-found/index";
+// import ShoppingHome from "./pages/shop/home";
+// import ShoppingCheckout from "./pages/shop/checkout";
+// import ShoppingListing from "./pages/shop/listing";
+// import ShoppingAccount from "./pages/shop/account";
+// import CheckAuth from "./components/common/checkauth";
+// import { useEffect } from "react";
+// import { startTokenRefresh } from "./utils/TokenManager";
+// import MainLayout from "./layout/MainLayout";
 
 // function App() {
-
-//   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-//   // const [user, setUser] = useState(null);
-
-//   // useEffect(() => {
-//   //   const token = localStorage.getItem("token");
-//   //   if(token){
-//   //     setIsAuthenticated(true);
-//   //     setUser({token});
-//   //   }
-//   // }, []);
+//   useEffect(() => {
+//     startTokenRefresh();
+//   }, []);
 
 //   return (
 //     <div className="flex flex-col overflow-hidden bg-white">
-//       {/* <h1>Header Component</h1> */}
-
 //       <Routes>
 //         <Route path="/auth" element={<CheckAuth><AuthLayout /></CheckAuth>}>
 //           <Route path="login" element={<AuthLogin />} />
@@ -88,3 +81,5 @@ export default App;
 // }
 
 // export default App;
+
+

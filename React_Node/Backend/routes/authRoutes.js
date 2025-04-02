@@ -1,14 +1,15 @@
 
 // with ES module
 import express from 'express';
-import { userRegister, userLogin } from '../controllers/authController.js';
+import { userRegister, userLogin , userRefreshToken, userLogout} from '../controllers/authController.js';
 import { registerValidation } from '../validations/authValidation.js';
 
 const router = express.Router();
 
 router.post('/register', registerValidation, userRegister);
 router.post('/login', userLogin);
-
+router.post('/refresh-token', userRefreshToken);
+router.post('/logout', userLogout);
 export default router;
 
 

@@ -4,7 +4,10 @@ import jwt from 'jsonwebtoken';
 import { getUserByUsername, registerUser , getUserById} from '../models/userModel.js';
 import { validationResult } from 'express-validator';
 
-const JWT_SECRET = 'your_jwt_secret'; // Use environment variable in production
+// const JWT_SECRET = 'your_jwt_secret'; // Use environment variable in production
+const JWT_SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET; // Store securely in .env
+const refreshTokens = []; // Temporary storage (Use DB in production)
 
 export const userRegister = async (req, res) => {
   const errors = validationResult(req);
@@ -55,6 +58,33 @@ export const userLogin = async (req, res) => {
   }
 };
 
+
+export const userRefreshToken = async (req, res) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken || !refreshTokens.includes(refreshToken)) {
+    return res.status(403).json({ message: "Refresh Token is not valid" });
+  }
+
+  jwt.verify(refreshToken, REFRESH_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ message: "Invalid Refresh Token" });
+
+    const newAccessToken = jwt.sign(
+      { id: user.U_Id, username: user.U_Username },
+      JWT_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    res.json({ newAccessToken });
+  });
+};
+
+// ✅ Logout (Invalidate Refresh Token)
+export const userLogout = (req, res) => {
+  const { refreshToken } = req.body;
+  refreshTokens = refreshTokens.filter(token => token !== refreshToken);
+  res.json({ message: "User logged out" });
+};
 
 
 
