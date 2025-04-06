@@ -10,7 +10,7 @@ function CommonForm({ fromControls, formData, setformData, onSubmit, buttonText 
       case "input":
         return (
           <Input
-            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex h-9 bg-transparent text-base shadow-sm transition-colors w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             type={getControlItem.type}
             placeholder={getControlItem.placeholder}
             name={getControlItem.name}
@@ -25,7 +25,7 @@ function CommonForm({ fromControls, formData, setformData, onSubmit, buttonText 
       case "textarea":
         return (
           <Textarea
-            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex min-h-[60px] bg-transparent text-base shadow-sm transition-colors w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder={getControlItem.placeholder}
             name={getControlItem.name}
             value={value}
@@ -60,7 +60,7 @@ function CommonForm({ fromControls, formData, setformData, onSubmit, buttonText 
       default:
         return (
           <Input
-            className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex h-9 bg-transparent text-base shadow-sm transition-colors w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             type={getControlItem.type}
             placeholder={getControlItem.placeholder}
             name={getControlItem.name}
@@ -78,7 +78,7 @@ function CommonForm({ fromControls, formData, setformData, onSubmit, buttonText 
     <form onSubmit={onSubmit} className="w-full space-y-4">
       {fromControls.map((controlItem) => (
         <div key={controlItem.name} className="flex flex-col gap-2">
-          <Label className="text-gray-700 font-medium">{controlItem.label}</Label>
+          <Label className="text-sm leading-none text-gray-700 font-medium">{controlItem.label}</Label>
           {renderInputsByComponentType(controlItem)}
         </div>
       ))}

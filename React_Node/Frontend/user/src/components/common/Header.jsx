@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-black text-white w-full fixed top-0 left-0 z-50 mb-10">
+    <header className="bg-black text-white w-full mb-10">
       <div className="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-white">
           MyApp
@@ -35,21 +35,21 @@ const Header = () => {
         <nav
           className={`lg:flex lg:space-x-6 ${
             menuOpen ? "block" : "hidden"
-          } absolute lg:static bg-blue-600 lg:bg-transparent top-14 left-0 w-full lg:w-auto p-4 lg:p-0 z-10`}
+          } absolute lg:static bg-black lg:bg-transparent top-14 left-0 w-full lg:w-auto p-4 lg:p-0 z-10`}
         >
-          <Link to="/" className="block px-3 py-2 lg:inline hover:bg-blue-700 rounded text-white">
+          <Link to="/" className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
             Home
           </Link>
-          <Link to="/about" className="block px-3 py-2 lg:inline hover:bg-blue-700 rounded text-white">
+          <Link to="/about" className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
             About
           </Link>
-          <Link to="/contact" className="block px-3 py-2 lg:inline hover:bg-blue-700 rounded text-white">
+          <Link to="/contact" className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
             Contact
           </Link>
 
           {isAuthenticated ? (
             <div className="relative group inline-block">
-              <button className="block px-3 py-2 lg:inline hover:bg-blue-700 rounded text-white">
+              <button className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
                 Account ▼
               </button>
               <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1 rounded w-36">

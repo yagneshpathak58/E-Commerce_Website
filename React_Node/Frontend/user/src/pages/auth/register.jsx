@@ -23,7 +23,9 @@ function AuthRegister() {
 
   return (
     <MainLayout>
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <div className="w-full mx-auto px-4 py-6 md:px-6 lg:px-8">
+        <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 px-4">
+          <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
           Create Your Account
         </h1>
@@ -41,6 +43,11 @@ function AuthRegister() {
           setformData={setformData}
           onSubmit={onSubmit}
         />
+          </div>
+
+        </div>
+        
+        
       </div>
     </MainLayout>
   );
