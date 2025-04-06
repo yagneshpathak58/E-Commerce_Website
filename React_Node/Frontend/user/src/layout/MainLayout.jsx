@@ -8,7 +8,7 @@ const MainLayout = ({ children }) => {
       <Header />
 
       {/* Main Content - Make Full Width */}
-      <main className="flex-grow w-full">
+      <main className="flex-grow w-full justify-center ">
         <div className="w-full mx-auto px-4 py-6 md:px-6 lg:px-8">
           {children}
         </div>

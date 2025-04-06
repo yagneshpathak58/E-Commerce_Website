@@ -84,3 +84,64 @@ body {
   display: flex;
   flex-direction: column;
 } */
+/* 🌗 Light/Dark Theme Styling */
+
+body {
+  @apply bg-white text-black transition-colors duration-300;
+}
+
+.dark body {
+  @apply bg-gray-900 text-white;
+}
+
+/* You can customize links too */
+a {
+  @apply text-black;
+}
+.dark a {
+  @apply text-blue-400;
+}
+
+/* Buttons */
+button {
+  @apply transition-all;
+}
+.dark button {
+  @apply bg-gray-800 text-white;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  @apply bg-white text-black border border-gray-300 rounded;
+}
+.dark input,
+.dark textarea,
+.dark select {
+  @apply bg-gray-800 text-white border-gray-600;
+}
+html {
+  scroll-behavior: smooth;
+}
+* {
+  transition: background-color 0.3s, color 0.3s;
+}
+section{
+  @apply transition-all;
+}
+.dark section{
+  @apply bg-gray-900 text-white;
+}
+ProductCard{
+  @apply transition-all;
+}
+.dark ProductCard{
+  @apply bg-gray-900 text-black;
+}
+mockProducts{
+  @apply transition-all;
+}
+.dark mockProducts{
+  @apply bg-gray-900 text-black;
+}

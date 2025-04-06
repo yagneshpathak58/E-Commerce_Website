@@ -10,10 +10,15 @@ import CheckAuth from "./components/common/checkauth";
 import { useEffect } from "react";
 import { startTokenRefresh } from "./utils/TokenManager";
 import MainLayout from "./layout/MainLayout";
+import Home from "./pages/home";
 
 function App() {
   useEffect(() => {
-    startTokenRefresh();
+    const token = localStorage.getItem('token');
+    if (token) {
+      startTokenRefresh();
+    }
+    // startTokenRefresh();
   }, []);
 
   return (
@@ -31,6 +36,7 @@ function App() {
 
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

@@ -1,3 +1,5 @@
+import { Value } from "@radix-ui/react-select"
+
 export const registerFromControls = [
     {
         name: "U_Name",
@@ -76,3 +78,14 @@ export const loginFromControls = [
         componentType: "input",
     }
 ]
+
+export const searchFormControls = [
+    {
+      name: "search",
+      label: "Search",
+      type: "text",
+      placeholder: "Search products...",
+      required: false,
+      componentType: "input",
+    },
+  ];

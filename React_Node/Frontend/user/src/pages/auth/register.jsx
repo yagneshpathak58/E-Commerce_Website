@@ -18,14 +18,41 @@ function AuthRegister() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    try
+    {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok) 
+      {
+
+        alert("Registration successful! You can now log in.");
+        window.location.href = "/auth/login";
+      }
+      else
+      {
+        alert(data.message || "Registration failed!");
+
+      }  
+
+    }
+    catch(error)
+    {
+      console.error("Registration Failed ! Try Again.",error);
+      alert("something went wrong during registration")
+    }
   };
 
   return (
     <MainLayout>
       <div className="w-full mx-auto px-4 py-6 md:px-6 lg:px-8">
-        <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 px-4">
-          <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 px-4 flex flex-col justify-center sm:min-h-[50vh]">
+          <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-fullxflex flex-col justify-center h-full sm:min-h-auto">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
           Create Your Account
         </h1>

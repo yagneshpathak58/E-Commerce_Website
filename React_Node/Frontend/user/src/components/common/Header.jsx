@@ -1,6 +1,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,6 +26,43 @@ const Header = () => {
           MyApp
         </Link>
 
+        {/* 🌓 Dark/Light Toggle */}
+        <div className="flex items-center gap-4">
+        <ThemeToggle />
+
+         {/* ✅ Reusable Search Form
+         <div className="flex-1 mx-4 flex justify-center max-w-md">
+          <CommonForm
+            fromControls={searchFormControls}
+            buttonText="Search"
+            formData={formData}
+            setformData={setFormData}
+            onSubmit={handleSearchSubmit}
+            customButtonClass="rounded-r-md bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+            customInputClass="text-black rounded-l-md px-4 py-2 w-full"
+            isInline
+          />
+        </div> */}
+        {/* Search Bar
+        <form
+          onSubmit={handleSearch}
+          className="flex-1 mx-4 flex justify-center"
+        >
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full max-w-md px-4 py-2 rounded-l-md text-black focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md"
+          >
+            Search
+          </button>
+        </form> */}
+
         <button
           className="lg:hidden block text-white focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -40,6 +78,24 @@ const Header = () => {
           <Link to="/" className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
             Home
           </Link>
+          {/* 🔽 Category Dropdown */}
+          <div className="relative group inline-block">
+            <button className="block px-3 py-2 hover:bg-gray-800 rounded">
+              Categories ▼
+            </button>
+            <div className="absolute hidden group-hover:block bg-black text-white shadow-md mt-1 rounded w-40 z-20">
+              <Link to="/shop/listing?category=clothing" className="block px-4 py-2 hover:bg-gray-200 text-white">
+                Clothing
+              </Link>
+              <Link to="/shop/listing?category=electronics" className="block px-4 py-2 hover:bg-gray-200 text-white">
+                Electronics
+              </Link>
+              <Link to="/shop/listing?category=accessories" className="block px-4 py-2 hover:bg-gray-200 text-white">
+                Accessories
+              </Link>
+            </div>
+          </div>
+
           <Link to="/about" className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
             About
           </Link>
@@ -52,13 +108,13 @@ const Header = () => {
               <button className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
                 Account ▼
               </button>
-              <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1 rounded w-36">
+              <div className="absolute hidden group-hover:block bg-black text-white shadow-md mt-1 rounded w-36">
                 <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">
                   Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                  className="w-full text-left px-4 py-2 hover:bg-gray-200 bg-black text-white"
                 >
                   Logout
                 </button>
@@ -75,6 +131,7 @@ const Header = () => {
             </>
           )}
         </nav>
+        </div>
       </div>
     </header>
   );

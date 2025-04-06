@@ -69,8 +69,9 @@ function AuthLogin() {
     // </MainLayout>
 
     <MainLayout>
-  <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 px-4">
-    <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+  <div className="w-full mx-auto px-4 py-6 md:px-6 lg:px-8">
+    <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 px-4 flex flex-col justify-center h-full sm:min-h-[50vh] ">
+    <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col justify-center h-full sm:min-h-auto">
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
         Sign In To Your Account
       </h1>
@@ -92,6 +93,8 @@ function AuthLogin() {
         onSubmit={onSubmit}
       />
     </div>
+    </div>
+    
   </div>
 </MainLayout>
   );
