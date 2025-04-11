@@ -1,8 +1,9 @@
 
 // with ES module
 import express from 'express';
-import { userRegister, userLogin , userRefreshToken, userLogout} from '../controllers/authController.js';
-import { registerValidation } from '../validations/authValidation.js';
+import { userRegister, userLogin , userRefreshToken, userLogout, getUserProfile, updateUserProfile, changePasswordController, forgotPasswordController, resetPasswordController} from '../controllers/authController.js';
+import { changePasswordValidation, forgotPasswordValidation, registerValidation, resetPasswordValidation, updateUserProfileValidation } from '../validations/authValidation.js';
+import { verifyToken } from '../middlewear/authMiddlewear.js';
 
 const router = express.Router();
 
@@ -10,6 +11,12 @@ router.post('/register', registerValidation, userRegister);
 router.post('/login', userLogin);
 router.post('/refresh-token', userRefreshToken);
 router.post('/logout', userLogout);
+
+router.get('/profile', verifyToken, getUserProfile);
+router.put('/updateprofile', updateUserProfileValidation, verifyToken, updateUserProfile);
+router.put('/changepassword', verifyToken, changePasswordValidation, changePasswordController);
+router.post('/forgotpassword', forgotPasswordValidation,forgotPasswordController);
+router.post('/resetpassword/:token', resetPasswordValidation,resetPasswordController);
 export default router;
 
 

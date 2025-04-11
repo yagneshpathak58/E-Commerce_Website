@@ -10,7 +10,7 @@ import db from '../config/db.js';
 export const getUserByUsername = async (U_Username) => {
     // Optional: Hardcoded test case for testing purposes
     if (U_Username === "testuser") {
-      return { U_ID: 1, U_Username: "testuser", U_PWD: "testpassword" };
+      return { U_Id : 1, U_Username: "testuser", U_PWD: "testpassword" };
     }
   
     // SQL query to fetch user from database
@@ -49,9 +49,39 @@ export const registerUser = async (user) => {
 
 export const getUserById = async (userId) => {
 
-    const [rows] = await db.query('SELECT * FROM user_master WHERE U_ID = ? ', [userId]);
+    const [rows] = await db.query('SELECT * FROM user_master WHERE 	U_Id  = ? ', [userId]);
 
     return rows[0];
 
 
+};
+
+/**
+ * @description Update User  Details by ID (used for update profile, etc.)
+
+ */
+export const updateUser = async (user) => {
+  const {U_Id, U_Name, U_EMAIL, U_PHONE, U_Address, U_Username} = user;
+
+  const [result] = await db.query('UPDATE user_master SET U_Name = ?, U_EMAIL = ?, U_PHONE = ?, U_Address = ?, U_Username = ? WHERE U_Id = ?', [U_Name, U_EMAIL, U_PHONE, U_Address, U_Username, U_Id]);
+
+  return result;
+
+};
+
+export const changePassword = async (user) => {
+
+    const {U_Id, hashedPassword} = user;
+
+    const [result] = await db.query('UPDATE user_master SET U_PWD =? WHERE U_Id =?', [hashedPassword, U_Id]);
+
+    return result;
+};
+
+
+export const getUserEmail = async (U_Email) => {
+
+  const [rows] = await db.query('SELECT * FROM user_master WHERE U_Email = ?',[U_Email]);
+
+  return rows.length > 0 ? rows[0] : null;
 };

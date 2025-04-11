@@ -11,6 +11,10 @@ import { useEffect } from "react";
 import { startTokenRefresh } from "./utils/TokenManager";
 import MainLayout from "./layout/MainLayout";
 import Home from "./pages/home";
+import Profile from "@/pages/profile";
+import ChangePassword from "@/pages/changepassword";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
+import ResetPassword from "@/pages/auth/ResetPassword";
 
 function App() {
   useEffect(() => {
@@ -27,6 +31,8 @@ function App() {
         {/* Protected Auth Pages (Only for Guests) */}
         <Route path="/auth/login" element={<CheckAuth><AuthLogin /></CheckAuth>} />
         <Route path="/auth/register" element={<CheckAuth><AuthRegister /></CheckAuth>} />
+        <Route path="/auth/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/auth/resetpassword/:token" element={<ResetPassword />} />
 
         {/* Protected Shopping Pages (Only for Authenticated Users) */}
         <Route path="/shop/home" element={<CheckAuth><ShoppingHome /></CheckAuth>} />
@@ -36,7 +42,11 @@ function App() {
 
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
+
+
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/changepassword" element={<CheckAuth><ChangePassword/></CheckAuth>}/>
       </Routes>
     </div>
   );

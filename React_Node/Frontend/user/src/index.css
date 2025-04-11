@@ -137,11 +137,57 @@ ProductCard{
   @apply transition-all;
 }
 .dark ProductCard{
-  @apply bg-gray-900 text-black;
+  @apply bg-gray-900 text-white;
 }
 mockProducts{
   @apply transition-all;
 }
 .dark mockProducts{
+  @apply bg-gray-900 text-white;
+}
+product{
+  @apply transition-all;
+}
+.dark product{
+  @apply bg-gray-900 text-white;
+}
+
+h1{
+  @apply transition-all;
+}
+.dark h1{
+  @apply bg-gray-900 text-white;
+}
+
+div{
+  @apply transition-all;
+}
+/* .dark div{
   @apply bg-gray-900 text-black;
+} */
+
+h2{
+  @apply transition-all;
+}
+.dark h2{
+  @apply bg-gray-900 text-white;
+}
+h3{
+  @apply transition-all;
+}
+.dark h3{
+  @apply bg-gray-900 text-white;
+}
+h4{
+  @apply transition-all;
+}
+.dark h4{
+  @apply bg-gray-900 text-white;
+}
+
+label{
+  @apply transition-all;  
+}
+.dark label{
+  @apply bg-gray-900 text-white;
 }

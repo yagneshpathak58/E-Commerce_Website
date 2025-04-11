@@ -30,7 +30,7 @@ function AuthLogin() {
       if (!response.ok) throw new Error(data.message || "Login failed!");
 
       localStorage.setItem("token", data.token);
-      window.location.href = "/shop/home";
+      window.location.href = "/";
     } catch (err) {
       setError(err.message);
     } finally {
@@ -39,34 +39,7 @@ function AuthLogin() {
   };
 
   return (
-    // <MainLayout>
-    //   {/* 🔥 Fix: Removed min-h-screen and used flex to center */}
-    //   <div className="w-full flex justify-center items-center py-16">
-    //     {/* Login Form */}
-    //     <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-    //       <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
-    //         Sign In To Your Account
-    //       </h1>
-    //       <p className="text-center text-gray-500">
-    //         Don't have an account?{" "}
-    //         <Link to="/auth/register" className="text-blue-600 hover:underline">
-    //           Sign Up
-    //         </Link>
-    //       </p>
-
-    //       {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-    //       {loading && <p className="text-gray-600 text-center">Logging in...</p>}
-
-    //       <CommonForm
-    //         fromControls={loginFromControls}
-    //         buttonText={"Sign In"}
-    //         formData={formData}
-    //         setformData={setformData}
-    //         onSubmit={onSubmit}
-    //       />
-    //     </div>
-    //   </div>
-    // </MainLayout>
+    
 
     <MainLayout>
   <div className="w-full mx-auto px-4 py-6 md:px-6 lg:px-8">
@@ -92,6 +65,11 @@ function AuthLogin() {
         setformData={setformData}
         onSubmit={onSubmit}
       />
+      <div className="text-center mt-4">
+        <Link to="/auth/forgotpassword" className="text-blue-600 hover:underline">
+          Forgot Password?
+        </Link>
+      </div>
     </div>
     </div>
     

@@ -108,10 +108,31 @@ const Header = () => {
               <button className="block px-3 py-2 lg:inline hover:bg-black rounded text-white">
                 Account ▼
               </button>
-              <div className="absolute hidden group-hover:block bg-black text-white shadow-md mt-1 rounded w-36">
+              <div className="absolute hidden group-hover:block text-white bg-black shadow-md mt-1 rounded w-36">
                 <Link to="/profile" className="block px-4 py-2 hover:bg-gray-200">
                   Profile
                 </Link>
+                {/* Change Password */}
+                <Link to="/changepassword" className="block px-4 py-2 hover:bg-gray-700">
+                  Change Password
+                </Link>
+                {/* Your Orders with Submenu */}
+                <div className="relative group">
+                  <button className="w-full text-left px-4 py-2 hover:bg-gray-700">
+                    Your Orders ▶
+                  </button>
+                  <div className="absolute left-full top-0 mt-0 ml-1 hidden group-hover:block bg-black text-white rounded w-48 shadow-md z-30">
+                    <Link to="/orders/history" className="block px-4 py-2 hover:bg-gray-700">
+                      Order History
+                    </Link>
+                    <Link to="/orders/recent" className="block px-4 py-2 hover:bg-gray-700">
+                      Recent Orders
+                    </Link>
+                    <Link to="/orders/payment-methods" className="block px-4 py-2 hover:bg-gray-700">
+                      Payment Methods
+                    </Link>
+                  </div>
+                </div>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 hover:bg-gray-200 bg-black text-white"

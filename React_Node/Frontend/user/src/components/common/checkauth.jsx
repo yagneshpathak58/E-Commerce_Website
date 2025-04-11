@@ -3,20 +3,17 @@ import { useEffect, useState } from "react";
 
 function CheckAuth({ children }) {
   const location = useLocation();
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(null); // null = not checked yet
   let inactivityTimeout;
 
   useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem("token");
-      setAuth(!!token);
-    };
+    const token = localStorage.getItem("token");
+    setAuth(!!token); // true if token exists
 
     const refreshToken = () => {
-      console.log("Refreshing token...");
-      const token = localStorage.getItem("token");
       if (token) {
-        localStorage.setItem("token", token); // Refresh the token
+        console.log("Refreshing token...");
+        localStorage.setItem("token", token);
       }
     };
 
@@ -29,8 +26,7 @@ function CheckAuth({ children }) {
       }, 300000); // 5 minutes
     };
 
-    checkToken();
-    const interval = setInterval(refreshToken, 300000); // Refresh token every 5 mins
+    const interval = setInterval(refreshToken, 300000);
     window.addEventListener("mousemove", handleUserActivity);
     window.addEventListener("keydown", handleUserActivity);
 
@@ -42,12 +38,22 @@ function CheckAuth({ children }) {
     };
   }, [location.pathname]);
 
-  if (!auth && !(location.pathname.includes("/login") || location.pathname.includes("/register"))) {
+  // While loading/checking auth status
+  if (auth === null) {
+    return null; // or a loading spinner
+  }
+
+  const guestOnlyRoutes = ["/auth/login", "/auth/register"];
+  const isGuestRoute = guestOnlyRoutes.some((path) =>
+    location.pathname.startsWith(path)
+  );
+
+  if (!auth && !isGuestRoute) {
     return <Navigate to="/auth/login" />;
   }
 
-  if (auth && (location.pathname.includes("/login") || location.pathname.includes("/register"))) {
-    return <Navigate to="/shop/home" />;
+  if (auth && isGuestRoute) {
+    return <Navigate to="/" />;
   }
 
   return <>{children}</>;
